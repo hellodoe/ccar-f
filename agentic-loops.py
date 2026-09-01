@@ -36,3 +36,18 @@ tools = [
     }
 ]
 
+
+user_prompt = "Hello, world!"
+messages = [{"role": "user", "content": user_prompt}]
+
+while True:
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        tools=tools,
+        messages=messages
+    )
+    if response.stop_reason == "end_turn":
+        break
+    # Handle tool_use next
+
